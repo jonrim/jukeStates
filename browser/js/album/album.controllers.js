@@ -2,22 +2,14 @@
 
 /* ALBUMS (SINGULAR) CONTROLLER */
 
-juke.controller('AlbumCtrl', function ($scope, $log, $stateParams, PlayerFactory, AlbumFactory) {
-  var id = $stateParams.id
-  AlbumFactory.fetchById(id)
-  .then(function (album) {
-    $scope.album = album;
-  })
-  .catch($log.error);
-  // $scope.$on('viewSwap', function (event, data) {
-  //   if (data.name !== 'oneAlbum') return $scope.showMe = false;
-  //   $scope.showMe = true;
-  // });
+juke.controller('AlbumCtrl', function ($scope, $log, PlayerFactory, album) {
+
+  $scope.album = album;
 
   // main toggle
   $scope.toggle = function (song) {
     if (song !== PlayerFactory.getCurrentSong()) {
-      PlayerFactory.start(song, $scope.album.songs);
+      PlayerFactory.start(song, album.songs);
     } else if ( PlayerFactory.isPlaying() ) {
       PlayerFactory.pause();
     } else {
@@ -37,18 +29,7 @@ juke.controller('AlbumCtrl', function ($scope, $log, $stateParams, PlayerFactory
 
 /* ALBUMS (PLURAL) CONTROLLER */
 
-juke.controller('AlbumsCtrl', function ($scope, $log, PlayerFactory, AlbumFactory) {
+juke.controller('AlbumsCtrl', function ($scope, albums) {
 
-  // $scope.showMe = true;
-
-  // $scope.$on('viewSwap', function (event, data) {
-  //   $scope.showMe = (data.name === 'allAlbums');
-  // });
-
-  AlbumFactory.fetchAll()
-  .then(function (albums) {
-    $scope.albums = albums;
-  })
-  .catch($log.error); // $log service can be turned on and off; also, pre-bound
-
+  $scope.albums = albums;
 });

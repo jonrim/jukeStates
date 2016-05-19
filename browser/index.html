@@ -24,12 +24,12 @@
         <sidebar ng-controller="SidebarCtrl">
           <img src="juke.svg" class="logo">
           <section>
-            <h4 class="menu-item active">
+            <h4 ui-sref-active="active" class="menu-item">
               <a ui-sref="albumList" ng-click="viewAlbums()">ALBUMS</a>
             </h4>
           </section>
           <section>
-            <h4 class="menu-item">
+            <h4 ui-sref-active="active" class="menu-item">
               <a ng-click="viewAllArtists()" ui-sref="artistList">ARTISTS</a>
             </h4>
           </section>
